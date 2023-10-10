@@ -19,7 +19,7 @@
   * Kafka
 * REST
 * HTTP
-  * [WebSocket][Произвольный регистронезависимый текст]
+  * WebSocket
   * 
 * gRPC
 * Firebase Cloud Messaging
