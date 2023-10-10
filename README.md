@@ -19,6 +19,7 @@
   * Kafka
 * REST
 * HTTP
+  * WebSocket
 * gRPC
 * Firebase Cloud Messaging
 * Nginx
