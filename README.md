@@ -279,5 +279,24 @@ Stream<Integer> builtStream = Stream.<Integer>builder()
 [вверх](#оглавление)
 
 ## Problem solving
+### ExceptionHandler для @Scheduled методов
+Проблема: @ExceptionHandler не работает для @Scheduled из-за многопоточности.
+Решение: Spring AOP
+```
+@Aspect
+@Component
+class ExceptionHandlerForScheduledTasks {
+    companion object : KLogging()
+
+    @Pointcut("execution(* com.foo.services.ScheduledService.*(..))")
+    fun scheduled() {
+    }
+
+    @AfterThrowing(pointcut = "scheduled()", throwing = "ex")
+    fun handleNoDataFoundException(ex: NoDataFoundException) =
+        logger.error { "NoDataFoundException exception, cause: ${ex.message}" }
+}
+```
+Альтернативное решение: реализовать свой ErrorHandler. Минус в том, что кастомный ErrorHandler будет использоваться как для @Scheduled методов, так и для остальных. Но для всех задач кроме @Scheduled должен использоваться дефолтный ErrorHandler, поэтому это решение не подходит.
 
 [вверх](#оглавление)
