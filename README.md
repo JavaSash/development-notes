@@ -292,9 +292,10 @@ class ExceptionHandlerForScheduledTasks {
     fun scheduled() {
     }
 
-    @AfterThrowing(pointcut = "scheduled()", throwing = "ex")
-    fun handleNoDataFoundException(ex: NoDataFoundException) =
-        logger.error { "NoDataFoundException exception, cause: ${ex.message}" }
+    @Around("sendPushes()")
+    fun handleNoDataFoundException(joinPoint: ProceedingJoinPoint) =
+        runCatching { joinPoint.proceed() }
+            .onFailure { logger.error { "NoDataFoundException exception, cause: ${it.message}" } }
 }
 ```
 Альтернативное решение: реализовать свой ErrorHandler. Минус в том, что кастомный ErrorHandler будет использоваться как для @Scheduled методов, так и для остальных. Но для всех задач кроме @Scheduled должен использоваться дефолтный ErrorHandler, поэтому это решение не подходит.
