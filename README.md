@@ -92,6 +92,8 @@
   * SQL vs noSQL
   * способы масштабирования бд
   * 
+* Security
+  * [JWT](#jwt)
 * DevOps
   * Docker
     * виртуалки vs докер - плюсы, минусы?
@@ -299,5 +301,11 @@ class ExceptionHandlerForScheduledTasks {
 }
 ```
 Альтернативное решение: реализовать свой ErrorHandler. Минус в том, что кастомный ErrorHandler будет использоваться как для @Scheduled методов, так и для остальных. Но для всех задач кроме @Scheduled должен использоваться дефолтный ErrorHandler, поэтому это решение не подходит.
+
+[вверх](#оглавление)
+
+## JWT
+https://habr.com/ru/companies/acribia/articles/457090/
+https://proglib.io/p/jwt-for-dummies
 
 [вверх](#оглавление)
