@@ -313,6 +313,9 @@ class ExceptionHandlerForScheduledTasks {
 https://habr.com/ru/companies/acribia/articles/457090/
 https://proglib.io/p/jwt-for-dummies
 
+![Схема авторизации через JWT](https://github.com/[JavaSash]/[development-notes]/blob/[main]/jwt.png?raw=true)
+
+
 [вверх](#оглавление)
 
 ## Уязвимости
