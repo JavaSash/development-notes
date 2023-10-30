@@ -301,7 +301,7 @@ class ExceptionHandlerForScheduledTasks {
     fun scheduled() {
     }
 
-    @Around("sendPushes()")
+    @Around("scheduled()")
     fun handleNoDataFoundException(joinPoint: ProceedingJoinPoint) =
         runCatching { joinPoint.proceed() }
             .onFailure { logger.error { "NoDataFoundException exception, cause: ${it.message}" } }
