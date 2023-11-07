@@ -64,6 +64,7 @@
   * bean post processor
   * CGLib, dynamic proxy
     * [Можно ли запроксировать класс если он final](#Можно-ли-запроксировать-класс-если-он-final)
+* DSL
 * Hibernate
   * проблема N+1, решение
   * @Transactional
