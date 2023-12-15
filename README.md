@@ -123,6 +123,7 @@
     * Bruteforce
     * DDoS
     * Rainbow table attack (https://www.cyclonis.com/ru/rainbow-table-password-attack-what-is-it-and-how-do-you-protect-yourself-from-it/)
+    * man-in-the-middle
 * DevOps
   * Docker
     * виртуалки vs докер - плюсы, минусы?
