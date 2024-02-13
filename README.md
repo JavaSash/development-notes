@@ -425,7 +425,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example.autoc
 ```
    * после spring 6. Добавить в resources директорию META-INF/spring файл org.springframework.boot.autoconfigure.AutoConfiguration.imports, в котором прописать путь до автоконфигурации (com.example.autoconfig.CustomAutoConfiguration)
 
-Статер готов. Чтобы использовать его в другом сервисе нужно положить его в maven central либо в локальный maven repository. Затем нужно добавить стартер в качестве зависимости в проект и прописать необходимый блок настроек в application.yml (тот который в @ConditionalOnProperty автоконфигурации).
+Стартер готов. Чтобы использовать его в другом сервисе нужно положить его в maven central либо в локальный maven repository. Затем нужно добавить стартер в качестве зависимости в проект и прописать необходимый блок настроек в application.yml (тот который в @ConditionalOnProperty автоконфигурации).
 
 [вверх](#оглавление)
 ### Stream API
