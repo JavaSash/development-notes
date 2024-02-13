@@ -62,7 +62,8 @@
   * Dependency injection
   * Способы заинжектить бин (конструктор, сеттер и тп). Когда применимы
   * SpringBoot
-    * (автоконфигурация, как написать стартер, как работает)
+    * (автоконфигурация, как работает)
+    * [Как написать свой SpringBootStarter](#как-написать-свой-springbootstarter)
   * Скоупы бинов
   * @PostConsruct, @Predestroy
   * Spring MVC
@@ -397,6 +398,34 @@ HashMap:
 ### Интерфейсы
 #### Что будет если мы имплементим 2 интерфейса с дефолтными методами с одинаковой сигнатурой?
 Будет конфликт. - Как решить конфликт? переопределить метод и в нём явно указать ИмяИнтерф.super.defaultMethod() либо переопределить своей реализацией.
+
+#### Spring
+
+[вверх](#оглавление)
+### Как написать свой SpringBootStarter
+1. Создать новый проект (не Spring и не SpringBoot проект)
+2. Создать класс с автоконфигурацией AutoConfiguration
+```
+@Configuration
+@ConditionalOnClass(CustomClass::class) // класс, при наличии которого автоконфигурирование сработает
+@ConditionalOnProperty(prefix = "your.config", name = ["name"], havingValue = "true", matchIfMissing = false) // блок конфигураций в application.yml, при значении которого автоконфигурирование сработает
+@EnableConfigurationProperties(CustomProperties::class) // java/kotlin представление блока настроек из application.yml
+@AutoConfigureBefore(SomeClass::class) //класс(ы) перед которым должно будет произойти автоконфигурирование
+@AutoConfigureAfter(AnotherClass::class) //класс(ы) после которого должно будет произойти автоконфигурирование
+class CustomAutoConfiguration {
+    @Bean
+    @ConditionalOnMissingBean
+    fun someBean(): BeanClass { *init bean* }
+}
+```
+3. Добавить информацию об автоконфигурации в resources
+   * до spring 6. Добавить в resources директорию META-INF файл spring.factories с таким сдержимым
+```
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example.autoconfig.CustomAutoConfiguration
+```
+   * после spring 6. Добавить в resources директорию META-INF/spring файл org.springframework.boot.autoconfigure.AutoConfiguration.imports, в котором прописать путь до автоконфигурации (com.example.autoconfig.CustomAutoConfiguration)
+
+Статер готов. Чтобы использовать его в другом сервисе нужно положить его в maven central либо в локальный maven repository. Затем нужно добавить стартер в качестве зависимости в проект и прописать необходимый блок настроек в application.yml (тот который в @ConditionalOnProperty автоконфигурации).
 
 [вверх](#оглавление)
 ### Stream API
